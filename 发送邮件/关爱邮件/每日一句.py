@@ -51,12 +51,15 @@ class DailyGreeting(object):
         r = requests.get(self.cb_link).json()
         en = r['content']
         cn = r['note']
+        mp3 = r['tts']
         indent = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' \
                  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
         # 填充每日一句模板
         msg = '<br><font size=3 color=lightpink><strong><i>' + en + '<br>' + cn + '</strong></font><br>' + \
               '<br>' + indent + '<font size=3 color=#a5673f>—— 最关心你的人儿~' + \
-              '<br><html><body><img src={}></body></html>'.format(r['fenxiang_img'])
+              '<br><html><body><audio controls="controls"><source src={}><img src={}></body></html>'.format(mp3,r['fenxiang_img'])
+
+              # '<br><audio controls="controls"><source src={}>'.format(mp3) +\
         return str(msg)
 
     @staticmethod
@@ -126,10 +129,13 @@ class DailyGreeting(object):
 if __name__ == '__main__':
     # 需要发送邮件的联系方式
     friend_list = [{'mail': 'q2311260561@gmail.com', 'city': '渭南'},
-                   {'mail': '1138446882@qq.com','city':'渭南'},
-                   {'mail': '2455706469@qq.com','city':'河池'},
-                   {'mail': 'jinhaoran1@qq.com','city':'无锡'},
-                   {'mail': '1147991965@qq.com','city':'玉林'}]
+                   # {'mail': '3039813794@qq.com', 'city': '渭南'}, #卓越
+                   {'mail': '1031708663@qq.com', 'city': '南宁'}, #桂龙
+                   # {'mail': '1138446882@qq.com','city':'渭南'}, #子颖
+                   # {'mail': '2455706469@qq.com','city':'河池'}, #肥神
+                   # {'mail': 'jinhaoran1@qq.com','city':'无锡'}, #然总
+                   # {'mail': '1147991965@qq.com','city':'玉林'}  #龙队
+                   ]
     # DailyGreeting(friend_list).main()
 
     SECONDS_PER_DAY = 24 * 60 * 60  # 一天时间(秒)
