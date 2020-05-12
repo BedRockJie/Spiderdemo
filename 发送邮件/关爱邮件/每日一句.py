@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-# @Author: Nick
-# @Last Modified by:   Nick
-# @Last Modified time: 2020-03-31 16:21:36
 
+
+import schedule
 import time
 import datetime
 import requests
@@ -128,22 +127,37 @@ class DailyGreeting(object):
 
 if __name__ == '__main__':
     # 需要发送邮件的联系方式
-    friend_list = [{'mail': 'q2311260561@gmail.com', 'city': '渭南'},
-                   # {'mail': '3039813794@qq.com', 'city': '渭南'}, #卓越
+    friend_list = [
+                   {'mail': 'q2311260561@gmail.com', 'city': '渭南'},
+                   {'mail': '3039813794@qq.com', 'city': '渭南'}, #卓越
                    {'mail': '1031708663@qq.com', 'city': '南宁'}, #桂龙
-                   # {'mail': '1138446882@qq.com','city':'渭南'}, #子颖
-                   # {'mail': '2455706469@qq.com','city':'河池'}, #肥神
-                   # {'mail': 'jinhaoran1@qq.com','city':'无锡'}, #然总
-                   # {'mail': '1147991965@qq.com','city':'玉林'}  #龙队
+                   {'mail': '1138446882@qq.com','city':'渭南'}, #子颖
+                   {'mail': '2455706469@qq.com','city':'河池'}, #肥神
+                   {'mail': 'jinhaoran1@qq.com','city':'无锡'}, #然总
+                   {'mail': '1147991965@qq.com','city':'玉林'},  #龙队
+                   {'mail': '485853431@qq.com','city':'贵港' }
+                   # {'mail': '2859955085@qq.com', 'city': '陆良'}
                    ]
-    # DailyGreeting(friend_list).main()
-
-    SECONDS_PER_DAY = 24 * 60 * 60  # 一天时间(秒)
-    SET_TIME = 7                    # 定时每日7点执行一次
-    is_first = True                 # 是否第一次执行任务
-    now = datetime.datetime.now()   # 第一次执行获取当前时间
-    # 定时执行任务逻辑
     DailyGreeting(friend_list).main()
+
+    # hanhu = DailyGreeting(friend_list)
+    # schedule.every().day.at("20:15").do(hanhu.main())
+    # DailyGreeting(friend_list).main()
+    # schedule.every(10).minutes.do(job)  # 每10分钟执行一次job函数
+    # schedule.every(10).seconds.do(job)  # 每10秒执行一次job函数
+    # schedule.every().hour.do(job)       # 当every()没参数时默认是1小时/分钟/秒执行一次job函数
+    # schedule.every().day.at("15:29").do(job)  # 在每天10:30执行job函数
+    # schedule.every(5).to(10).days.do(job)
+    # schedule.every(5).to(10).seconds.do(job) # 每隔5秒和10秒执行job工作
+    # schedule.every().monday.do(job)  # 每周一执行
+    # schedule.every().wednesday.at("13:15").do(job)  # 具体某一天某个时刻执行一次job函数
+    # schedule.every(10).seconds.do(job2)    # 可以同时定时执行多个任务，但是每个任务是按顺序执行
+    #
+    # SECONDS_PER_DAY = 24 * 60 * 60  # 一天时间(秒)
+    # SET_TIME = 7                    # 定时每日7点执行一次
+    # is_first = True                 # 是否第一次执行任务
+    # now = datetime.datetime.now()   # 第一次执行获取当前时间
+    # 定时执行任务逻辑
     # while True:
     #     cur_s = now.hour * 60 * 60 + now.minute * 60 + now.second   # 当前时间(时+分+秒)--> 秒
     #     first_gap_s = 0     # 第一次等待的时间(秒)
